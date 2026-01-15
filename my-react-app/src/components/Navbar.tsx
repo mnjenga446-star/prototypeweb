@@ -1,70 +1,71 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Products', href: '#products' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Stores', href: '#stores' },
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'Products', href: '/products' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Stores', href: '/stores' },
   ];
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-white shadow-sm sticky top-0 z-50 border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <div className="text-3xl font-bold text-blue-600">LOGO</div>
+          <div className="flex items-center">
+            <a href="/">
+              <img src="/logo.png" alt="Limuru Fresh Dairy" className="h-16" />
+            </a>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex md:space-x-10">
-            {navItems.map((item) => (
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-12">
+            {navLinks.map(link => (
               <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-800 hover:text-blue-600 text-lg font-semibold transition-all duration-200 relative group"
+                key={link.name}
+                href={link.href}
+                className="text-gray-900 hover:text-green-600 transition font-medium"
               >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+                {link.name}
               </a>
             ))}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center">
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-gray-800 hover:bg-gray-100 transition-colors"
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="text-gray-900 hover:text-green-600 transition"
+              aria-label="Toggle menu"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {menuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t-2 border-gray-100">
-          <div className="px-4 pt-4 pb-6 space-y-3">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="block px-4 py-3 text-lg font-semibold text-gray-800 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </a>
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
+          <ul className="flex flex-col space-y-4 px-4 py-6">
+            {navLinks.map(link => (
+              <li key={link.name}>
+                <a
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block text-gray-900 hover:text-green-600 font-medium"
+                >
+                  {link.name}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       )}
     </nav>
   );
-};
-
-export default Navbar;
+}

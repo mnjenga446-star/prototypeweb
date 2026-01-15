@@ -1,74 +1,13 @@
-import { Phone, Mail, Instagram, Linkedin, Twitter, Menu,X} from 'lucide-react';
-import { useState } from 'react';
+import { Phone, Mail, Instagram, Linkedin, Twitter} from 'lucide-react';
+import Navbar from './Navbar';
 
 export default function LimuruDairyAbout() {
-    const [menuOpen, setMenuOpen] = useState(false);
-     
+   
     
-      const navLinks = [
-        { name: 'Home', href: '/' },
-        { name: 'Products', href: '/products' },
-        { name: 'About Us', href: '/about' },
-        { name: 'Stores', href: '/stores' },
-      ];
+      
   return (
     <div className="min-h-screen bg-white">
-        {/* Header */}
-        <header className="border-b">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-
-                {/* Logo */}
-                <div className="flex items-center">
-                <img src="/logo.png" alt="Limuru Fresh Dairy" className="h-16" />
-                </div>
-
-                {/* Desktop Menu (Right Side) */}
-                <nav className="hidden md:flex space-x-12">
-                {navLinks.map(link => (
-                    <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-gray-900 hover:text-green-600 transition font-medium"
-                    >
-                    {link.name}
-                    </a>
-                ))}
-                </nav>
-
-                {/* Mobile Menu Button */}
-                <div className="md:hidden flex items-center">
-                <button
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    className="text-gray-900 hover:text-green-600 transition"
-                >
-                    {menuOpen ? <X size={28} /> : <Menu size={28} />}
-                </button>
-                </div>
-
-            </div>
-
-            {/* Mobile Menu (Full Width) */}
-            {menuOpen && (
-                <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
-                <ul className="flex flex-col space-y-4 px-4 py-6">
-                    {navLinks.map(link => (
-                    <li key={link.name}>
-                        <a
-                        href={link.href}
-                        onClick={() => setMenuOpen(false)}
-                        className="block text-gray-900 hover:text-green-600 font-medium"
-                        >
-                        {link.name}
-                        </a>
-                    </li>
-                    ))}
-                </ul>
-                </div>
-            )}
-            </div>
-        </header>
-
+        <Navbar/>
 
       {/* Hero Section - Story */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
